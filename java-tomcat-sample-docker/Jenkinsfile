@@ -4,8 +4,7 @@ pipeline {
         stage('Build Application') {
             steps {
                 sh '''#!/bin/bash
-                    echo "$PATH"
-                    source "$HOME/.sdkman/bin/sdkman-init.sh"
+                     sdk version
                     mvn -f java-tomcat-sample-docker/pom.xml clean package
                 '''
                 // sh 
