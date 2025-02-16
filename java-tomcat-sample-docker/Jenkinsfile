@@ -8,6 +8,9 @@ pipeline {
                 sh 'bash -c "whoami"'
                 sh 'bash -c "echo $PATH"'
                 sh 'bash -c "echo $HOME"'
+                sh 'bash -c "java -version"'
+                sh 'bash -c "docker version"'
+            
                 sh 'bash -c "sdk version"'
                 sh '''#!/bin/bash
                      sdk version
