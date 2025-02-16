@@ -5,6 +5,7 @@ pipeline {
             steps {
                 sh 'bash -c "echo Hello from Bash"'
                 sh 'bash -c "pwd"'
+                sh 'bash -c "whoami"'
                 sh 'bash -c "sdk version"'
                 sh '''#!/bin/bash
                      sdk version
