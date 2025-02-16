@@ -44,7 +44,7 @@ pipeline {
 
                     # Check if there are images to remove
                     if [ -n "\$images_to_remove" ]; then
-                    echo "Removing the following images: \$images_to_remove"
+                    echo "Removing the following images:\n\$images_to_remove"
                     echo "\$images_to_remove" | xargs docker rmi -f
                     else
                     echo "No images to remove."
