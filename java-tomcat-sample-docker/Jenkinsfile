@@ -13,7 +13,8 @@ pipeline {
                 sh '''#!/bin/bash
                     export SDKMAN_DIR="$HOME/.sdkman"
                     [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-                    sdk version
+                    # sdk version
+                    mvn -f java-tomcat-sample-docker/pom.xml clean package
                 '''
                 // sh 'bash -c "sdk version"'
                 // sh '''#!/bin/bash
