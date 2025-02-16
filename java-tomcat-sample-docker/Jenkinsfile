@@ -10,12 +10,16 @@ pipeline {
                 sh 'bash -c "echo $HOME"'
                 sh 'bash -c "java -version"'
                 sh 'bash -c "docker version"'
-            
-                sh 'bash -c "sdk version"'
                 sh '''#!/bin/bash
-                     sdk version
-                    mvn -f java-tomcat-sample-docker/pom.xml clean package
+                    export SDKMAN_DIR="$HOME/.sdkman"
+                    [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+                    sdk version
                 '''
+                // sh 'bash -c "sdk version"'
+                // sh '''#!/bin/bash
+                //      sdk version
+                //     mvn -f java-tomcat-sample-docker/pom.xml clean package
+                // '''
                 // sh 
                 // 'mvn -f java-tomcat-sample-docker/pom.xml clean package'
             }
@@ -31,7 +35,7 @@ pipeline {
             steps {
                 sh "pwd"
                 sh "ls -a"
-                sh "docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}"
+                // sh "docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}"
             }
         }
 
