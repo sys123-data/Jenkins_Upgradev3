@@ -41,9 +41,15 @@ pipeline {
         }
         stage('Cleanup container') {
                 steps {
-                    // Stop and remove the container after the new build
-                    sh "docker stop tomcat-container"
-                    sh "docker rm tomcat-container"
+                     // Check if the container exists (including stopped containers), and stop & remove it if it does
+                        sh '''
+                        if [ "$(docker ps -a -q -f name=tomcat-container)" ]; then
+                            docker stop tomcat-container
+                            docker rm tomcat-container
+                        else
+                            echo "Container 'tomcat-container' does not exist."
+                        fi
+                        '''
                 }
             }
         stage('Cleanup') {
