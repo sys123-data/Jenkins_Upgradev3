@@ -37,18 +37,19 @@ pipeline {
                 sh "pwd"
                 sh "ls -a"
                 sh "docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}"
-                sh '''#!/bin/bash
+                sh """
+                    #!/bin/bash
                     # Remove all images except the one we just built
-                    images_to_remove=$(docker images --format '{{.Repository}}:{{.Tag}}'| grep -v '<none>:<none>'| grep -v "tomcatsamplewebapp:${env.BUILD_ID}")
-                    
+                    images_to_remove=\$(docker images --format '{{.Repository}}:{{.Tag}}' | grep -v '<none>:<none>' | grep -v "tomcatsamplewebapp:${env.BUILD_ID}")
+
                     # Check if there are images to remove
-                    if [ -n "$images_to_remove" ]; then
-                        echo "Removing the following images: \$images_to_remove"
-                        echo "$images_to_remove" | xargs docker rmi -f
+                    if [ -n "\$images_to_remove" ]; then
+                    echo "Removing the following images: \$images_to_remove"
+                    echo "\$images_to_remove" | xargs docker rmi -f
                     else
-                        echo "No images to remove."
+                    echo "No images to remove."
                     fi
-                '''
+                    """
             }
         }
         stage('Cleanup container') {
