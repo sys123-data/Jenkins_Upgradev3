@@ -4,6 +4,7 @@ pipeline {
         stage('Build Application') {
             steps {
                 sh 'bash -c "echo Hello from Bash"'
+                sh 'bash -c "echo "pwd" && pwd'
                 sh 'bash -c "sdk version"'
                 sh '''#!/bin/bash
                      sdk version
