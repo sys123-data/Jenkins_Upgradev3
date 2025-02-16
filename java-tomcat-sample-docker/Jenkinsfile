@@ -3,7 +3,12 @@ pipeline {
     stages {
         stage('Build Application') {
             steps {
-                sh 'mvn -f java-tomcat-sample-docker/pom.xml clean package'
+                sh '''
+                    source "$HOME/.sdkman/bin/sdkman-init.sh"
+                    mvn -f java-tomcat-sample-docker/pom.xml clean package
+                '''
+                // sh 
+                // 'mvn -f java-tomcat-sample-docker/pom.xml clean package'
             }
             post {
                 success {
