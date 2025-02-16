@@ -3,6 +3,8 @@ pipeline {
     stages {
         stage('Build Application') {
             steps {
+                sh 'bash -c "echo Hello from Bash"'
+                sh 'bash -c "sdk version"'
                 sh '''#!/bin/bash
                      sdk version
                     mvn -f java-tomcat-sample-docker/pom.xml clean package
