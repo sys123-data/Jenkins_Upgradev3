@@ -39,6 +39,19 @@ pipeline {
                 sh "docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}"
             }
         }
+        stage('Cleanup container') {
+                steps {
+                    // Stop and remove the container after the new build
+                    sh "docker stop tomcat-container"
+                    sh "docker rm tomcat-container"
+                }
+            }
+        stage('Cleanup') {
+                steps {
+                    // Start the Docker container
+                    sh "docker run -d -p 8088:8080 --name tomcat-container tomcatsamplewebapp:${env.BUILD_ID}"
+                }
+            }
 
 
     }
