@@ -12,7 +12,6 @@ pipeline {
                     sh """
                     #!/bin/bash
                     echo $PATH
-                    # echo $DOCKER_HOST
                     docker --version
                     """   
                 // sh '''#!/bin/bash
