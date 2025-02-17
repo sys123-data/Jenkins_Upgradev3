@@ -40,8 +40,12 @@ pipeline {
             steps {
                 sh "pwd"
                 sh "ls -a"
-                           
-                sh "docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}"
+                // sh "docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}"           
+                sh """
+                #!/bin/bash
+                export DOCKER_HOST=unix:///home/hack/.docker/desktop/docker.sock
+                docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}
+                """
                 sh """
                     #!/bin/bash
                     # Remove all images except the one we just built
