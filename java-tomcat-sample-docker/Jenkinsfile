@@ -2,6 +2,8 @@ pipeline {
     agent any
     environment {
         DOCKER_HOST = "unix:///home/hack/.docker/desktop/docker.sock"
+        MAVEN_HOME = "/var/lib/jenkins/.sdkman/candidates/maven/current"
+        PATH = "$MAVEN_HOME/bin:$PATH"
     }
     stages {
         stage('Build Application') {
