@@ -15,23 +15,23 @@ pipeline {
                 sh 'bash -c "echo $HOME"'
                 sh 'bash -c "java -version"'
                 sh 'docker --version'
-                    sh """
-                    #!/bin/bash
-                    echo $PATH
-                    docker --version
-                    """   
-                sh '''#!/bin/bash
-                    export SDKMAN_DIR="$HOME/.sdkman"
-                    [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-                    # sdk version
-                    mvn -f java-tomcat-sample-docker/pom.xml clean package
-                '''
+                    // sh """
+                    // #!/bin/bash
+                    // echo $PATH
+                    // docker --version
+                    // """   
+                // sh '''#!/bin/bash
+                //     export SDKMAN_DIR="$HOME/.sdkman"
+                //     [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+                //     # sdk version
+                //     mvn -f java-tomcat-sample-docker/pom.xml clean package
+                // '''
                 // sh 'bash -c "sdk version"'
                 // sh '''#!/bin/bash
                 //      sdk version
                 //     mvn -f java-tomcat-sample-docker/pom.xml clean package
                 // '''
-                // sh 'mvn -f java-tomcat-sample-docker/pom.xml clean package'
+                sh 'mvn -f java-tomcat-sample-docker/pom.xml clean package'
             }
             post {
                 success {
@@ -45,12 +45,12 @@ pipeline {
             steps {
                 sh "pwd"
                 sh "ls -a"
-                // sh "docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}"           
-                sh """
-                #!/bin/bash
-                # export DOCKER_HOST=unix:///home/hack/.docker/desktop/docker.sock
-                docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}
-                """
+                sh "docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}"           
+                // sh """
+                // #!/bin/bash
+                // # export DOCKER_HOST=unix:///home/hack/.docker/desktop/docker.sock
+                // docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}
+                // """
                 sh """
                     #!/bin/bash
                     # Remove all images except the one we just built
