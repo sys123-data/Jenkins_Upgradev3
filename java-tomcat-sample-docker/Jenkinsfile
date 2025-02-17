@@ -9,6 +9,7 @@ pipeline {
                 sh 'bash -c "echo $PATH"'
                 sh 'bash -c "echo $HOME"'
                 sh 'bash -c "java -version"'
+                sh 'docker --version'
                     sh """
                     #!/bin/bash
                     echo $PATH
