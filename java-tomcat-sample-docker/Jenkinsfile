@@ -14,17 +14,17 @@ pipeline {
                     echo $PATH
                     docker --version
                     """   
-                // sh '''#!/bin/bash
-                //     export SDKMAN_DIR="$HOME/.sdkman"
-                //     [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-                //     # sdk version
-                //     mvn -f java-tomcat-sample-docker/pom.xml clean package
-                // '''
-                // sh 'bash -c "sdk version"'
                 sh '''#!/bin/bash
-                     sdk version
+                    export SDKMAN_DIR="$HOME/.sdkman"
+                    [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+                    # sdk version
                     mvn -f java-tomcat-sample-docker/pom.xml clean package
                 '''
+                // sh 'bash -c "sdk version"'
+                // sh '''#!/bin/bash
+                //      sdk version
+                //     mvn -f java-tomcat-sample-docker/pom.xml clean package
+                // '''
                 // sh 'mvn -f java-tomcat-sample-docker/pom.xml clean package'
             }
             post {
