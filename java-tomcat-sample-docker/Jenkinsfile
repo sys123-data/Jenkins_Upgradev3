@@ -9,7 +9,12 @@ pipeline {
                 sh 'bash -c "echo $PATH"'
                 sh 'bash -c "echo $HOME"'
                 sh 'bash -c "java -version"'
-                sh 'bash -c "docker version"'
+                    sh """
+                    #!/bin/bash
+                    echo $PATH
+                    echo $DOCKER_HOST
+                    docker --version
+                    """   
                 // sh '''#!/bin/bash
                 //     export SDKMAN_DIR="$HOME/.sdkman"
                 //     [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
@@ -35,12 +40,7 @@ pipeline {
             steps {
                 sh "pwd"
                 sh "ls -a"
-                sh """
-                    #!/bin/bash
-                    echo $PATH
-                    echo $DOCKER_HOST
-                    docker --version
-                    """                  
+                           
                 sh "docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}"
                 sh """
                     #!/bin/bash
