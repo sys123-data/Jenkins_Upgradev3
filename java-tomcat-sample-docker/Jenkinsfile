@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        DOCKER_HOST = "unix:///home/hack/.docker/desktop/docker.sock"
+    }
     stages {
         stage('Build Application') {
             steps {
@@ -43,7 +46,7 @@ pipeline {
                 // sh "docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}"           
                 sh """
                 #!/bin/bash
-                export DOCKER_HOST=unix:///home/hack/.docker/desktop/docker.sock
+                # export DOCKER_HOST=unix:///home/hack/.docker/desktop/docker.sock
                 docker build ./java-tomcat-sample-docker -t tomcatsamplewebapp:${env.BUILD_ID}
                 """
                 sh """
